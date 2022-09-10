@@ -262,7 +262,11 @@ namespace ShaderRenderer
                 openFileDialog.RestoreDirectory = true;
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
-                    window.AddTexture(openFileDialog.FileName);
+                {
+                    window.fragShader = openFileDialog.FileName;
+                    window.LoadShader(false);
+                }
+                    
             }
         }
         static void AddTexture()
@@ -278,7 +282,7 @@ namespace ShaderRenderer
                     window.AddTexture(openFileDialog.FileName);
             }
         }
-        [STAThreadAttribute]
+        [STAThread]
         static void Main(string[] args)
         {
             window = new Window(1280, 720, 120, "vertexShader.glsl", "fragmentShader.glsl");
